@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Hamsa Mortgages
 
-## Getting Started
+Marketing site for **Hamsa Mortgage Brokers** — a Dubai (DIFC) mortgage brokerage arranging finance across 15+ UAE banks for residents, non-residents and global investors.
 
-First, run the development server:
+Static site by design: no backend, database or analytics yet. All lead capture flows out through WhatsApp deep links, ready to be swapped for a real API later.
+
+## Stack
+
+- Next.js 16 (App Router, Turbopack) · fully static prerender
+- React 19, TypeScript (strict)
+- Tailwind CSS v4 (`@theme` tokens in `app/globals.css`)
+- Three.js — interactive dotted globe in the hero (`components/three/`)
+- Fonts: Fraunces (display) + Manrope (body) via `next/font`
+- Images: Unsplash via `next/image` (remote pattern configured)
+- Motion: scroll reveals (`components/reveal.tsx`), count-up stats, bank marquee — all respect `prefers-reduced-motion`
+
+## Develop
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run dev     # http://localhost:3000
+npm run build   # production build
+npm run start   # serve production build
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Pages
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Route | Content |
+| --- | --- |
+| `/` | Hero + quick EMI check, bank strip, borrower segments, calculators, value props, rates snapshot, process, Dubai stats, FAQ, lead form |
+| `/calculators` | Installment & total-cash-outlay, borrowing capacity (50% DBR), buyout/refinance — with full Dubai fee schedule |
+| `/services` | Residential, non-resident, commercial & building, rent-income-only, buyout/equity release |
+| `/why-dubai` | Q1 2026 market stats, visa matcher (2-year vs Golden Visa), fundamentals, escrow protection |
+| `/how-it-works` | 9-step journey, seller-mortgage/Oqood notes, document checklist |
+| `/rates` | Rate landscape, eligibility criteria, LTV table, settlement rules, fee transparency, eligibility screener, FAQ |
+| `/about` | Story, advisory team, contact + callback form |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Where things live
 
-## Learn More
+- `lib/site.ts` — phone, WhatsApp number, email, address, socials (**placeholders — replace before launch**)
+- `lib/mortgage.ts` — EMI/affordability math, Central Bank LTV rules, Dubai fee constants
+- `lib/data.ts` — all page content: banks, rates, fees, criteria, steps, FAQs, team
+- `components/logo.tsx` — official swan icon (inline SVG path)
+- `components/three/` — Three.js dotted globe (lazy-loaded, WebGL-fallback safe)
+- `components/tools/` — calculators, eligibility screener, visa matcher, lead form
 
-To learn more about Next.js, take a look at the following resources:
+## Before launch checklist
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [ ] Replace placeholder phone/WhatsApp/email in `lib/site.ts`
+- [ ] Replace team placeholders with real advisor names/bios/photos
+- [ ] Confirm rate figures against current bank sheets
+- [ ] Point `site.url` at the real domain
+- [ ] Add analytics + a real lead endpoint (backend phase)
