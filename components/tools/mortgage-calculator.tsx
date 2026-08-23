@@ -126,7 +126,7 @@ export function MortgageCalculator() {
         <p className="font-display mt-2 text-5xl font-semibold text-mist-50 tabular-nums">
           {aed(result.monthly)}
         </p>
-        <p className="mt-1.5 text-sm text-navy-400">
+        <p className="mt-1.5 text-sm text-navy-300">
           {aed(result.costs.loanAmount)} loan · {tenure} years ·{" "}
           {rate.toFixed(2)}% p.a. · total interest {aed(result.totalInterest)}
         </p>
@@ -172,7 +172,7 @@ export function MortgageCalculator() {
           </div>
         </div>
 
-        <p className="mt-5 rounded-xl bg-white/5 p-3.5 text-xs leading-relaxed text-navy-400">
+        <p className="mt-5 rounded-xl bg-white/5 p-3.5 text-xs leading-relaxed text-navy-300">
           {ltvNote} Indicative only — banks apply their own criteria, and life
           and property insurance are additional.
         </p>

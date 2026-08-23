@@ -329,6 +329,43 @@ export const FAQS = [
   },
 ] as const;
 
+/**
+ * Vetted Dubai photography (Unsplash) for parallax showcases.
+ * Every URL verified reachable and visually confirmed as Dubai.
+ */
+export const DUBAI_GALLERY = [
+  {
+    src: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=1600&auto=format&fit=crop",
+    alt: "Downtown Dubai skyline glowing at dusk",
+    caption: "Downtown at dusk",
+    tall: true,
+  },
+  {
+    src: "https://images.unsplash.com/photo-1546412414-e1885259563a?q=80&w=1200&auto=format&fit=crop",
+    alt: "Burj Al Arab standing on the Arabian Gulf coastline",
+    caption: "Burj Al Arab",
+    tall: false,
+  },
+  {
+    src: "https://images.unsplash.com/photo-1489516408517-0c0a15662682?q=80&w=1400&auto=format&fit=crop",
+    alt: "Aerial view over Palm Jumeirah and Atlantis",
+    caption: "Palm Jumeirah",
+    tall: false,
+  },
+  {
+    src: "https://images.unsplash.com/photo-1526495124232-a04e1849168c?q=80&w=1200&auto=format&fit=crop",
+    alt: "Sheikh Zayed Road towers lit up in the evening",
+    caption: "Sheikh Zayed Road",
+    tall: true,
+  },
+  {
+    src: "https://images.unsplash.com/photo-1518684079-3c830dcef090?q=80&w=1400&auto=format&fit=crop",
+    alt: "Dubai Marina skyscrapers reflected after dark",
+    caption: "Marina nights",
+    tall: false,
+  },
+] as const;
+
 export const TEAM = [
   {
     role: "Head of Advisory",

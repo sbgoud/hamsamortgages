@@ -34,22 +34,22 @@ export function SectionHeading({
     >
       {kicker && (
         <span
-          className={`inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-[0.68rem] font-bold uppercase tracking-[0.18em] ${
+          className={`inline-flex items-center gap-2.5 rounded-full px-4 py-1.5 text-[0.68rem] font-bold uppercase tracking-[0.2em] ${
             dark
-              ? "border border-white/15 bg-white/5 text-royal-300"
-              : "border border-royal-100 bg-royal-50 text-royal-700"
+              ? "glass text-royal-300"
+              : "border border-royal-100/80 bg-gradient-to-r from-royal-50 to-mist-100 text-royal-700"
           }`}
         >
           <span
-            className={`h-1.5 w-1.5 rounded-full ${
-              dark ? "bg-royal-300" : "bg-royal-600"
+            className={`h-1.5 w-1.5 rounded-full animate-pulse ${
+              dark ? "bg-gold-400" : "bg-royal-600"
             }`}
           />
           {kicker}
         </span>
       )}
       <h2
-        className={`font-display mt-4 text-3xl font-semibold tracking-tight text-balance sm:text-[2.6rem] sm:leading-[1.15] ${
+        className={`font-display mt-5 text-3xl font-semibold tracking-tight text-balance sm:text-[2.8rem] sm:leading-[1.12] ${
           dark ? "text-white" : "text-navy-950"
         }`}
       >
@@ -57,7 +57,7 @@ export function SectionHeading({
       </h2>
       {lede && (
         <p
-          className={`mt-4 text-base leading-relaxed sm:text-lg ${
+          className={`mt-5 text-base leading-relaxed sm:text-lg ${
             dark ? "text-navy-200" : "text-navy-500"
           }`}
         >
@@ -69,25 +69,27 @@ export function SectionHeading({
 }
 
 const buttonBase =
-  "inline-flex items-center justify-center gap-2 rounded-full text-sm font-semibold transition-all duration-200 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-royal-500";
+  "inline-flex items-center justify-center gap-2 rounded-full text-sm font-semibold transition-all duration-300 active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-royal-500 cursor-pointer";
 
 const variants = {
   primary:
-    "bg-royal-600 text-white shadow-soft hover:bg-royal-500 hover:shadow-glow px-6 py-3",
+    "bg-royal-600 text-white shadow-soft hover:bg-royal-500 hover:shadow-glow btn-shimmer px-6 py-3",
   accent:
-    "bg-gradient-to-r from-royal-500 via-royal-600 to-royal-700 text-white shadow-glow hover:brightness-110 px-6 py-3",
+    "bg-gradient-to-r from-royal-500 via-royal-600 to-royal-700 text-white shadow-glow hover:shadow-[0_16px_48px_-8px_rgba(0,15,159,0.6)] hover:brightness-110 btn-shimmer px-6 py-3",
   outline:
     "border border-navy-200 bg-white text-navy-900 hover:border-royal-400 hover:text-royal-700 hover:shadow-soft px-6 py-3",
   "outline-dark":
-    "border border-white/20 text-white hover:border-royal-300 hover:text-royal-200 hover:bg-white/5 px-6 py-3",
+    "border border-white/15 text-white hover:border-royal-300 hover:text-royal-200 hover:bg-white/5 px-6 py-3",
   whatsapp:
-    "bg-[#1faa53] text-white hover:bg-[#189546] shadow-soft hover:shadow-lift px-6 py-3",
+    "bg-[#1faa53] text-white hover:bg-[#189546] shadow-soft hover:shadow-[0_12px_32px_-8px_rgba(31,170,83,0.4)] btn-shimmer px-6 py-3",
+  ghost:
+    "text-navy-600 hover:text-royal-600 hover:bg-royal-50/60 px-5 py-2.5",
 } as const;
 
 const sizes = {
   md: "",
   sm: "px-4 py-2 text-[0.8rem]",
-  lg: "px-7 py-3.5 text-base",
+  lg: "px-8 py-4 text-base",
 } as const;
 
 export function ButtonLink({
@@ -135,7 +137,25 @@ export function Card({
 }) {
   return (
     <div
-      className={`rounded-2xl border border-navy-100 bg-white p-6 shadow-card ${className ?? ""}`}
+      className={`rounded-2xl border border-navy-100/60 bg-white p-6 shadow-card card-hover ${className ?? ""}`}
+    >
+      {children}
+    </div>
+  );
+}
+
+export function GlassCard({
+  children,
+  className,
+  dark = false,
+}: {
+  children: ReactNode;
+  className?: string;
+  dark?: boolean;
+}) {
+  return (
+    <div
+      className={`rounded-2xl ${dark ? "glass" : "glass-card"} p-6 shadow-glass card-hover ${className ?? ""}`}
     >
       {children}
     </div>
@@ -151,10 +171,10 @@ export function Pill({
 }) {
   return (
     <span
-      className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-semibold ${
+      className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold ${
         dark
-          ? "border border-white/15 bg-white/5 text-navy-200 backdrop-blur-sm"
-          : "border border-navy-100 bg-white text-navy-600 shadow-soft"
+          ? "glass text-navy-200"
+          : "border border-navy-100/60 bg-white/80 text-navy-600 shadow-soft backdrop-blur-sm"
       }`}
     >
       {children}

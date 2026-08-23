@@ -41,13 +41,13 @@ ${form.notes ? `Notes: ${form.notes}` : ""}`;
   };
 
   const inputCls =
-    "w-full rounded-xl border border-navy-200 bg-mist-50 px-4 py-3 text-sm font-medium outline-none transition focus:border-royal-500 focus:ring-2 focus:ring-royal-500/20";
+    "w-full rounded-xl border border-navy-200/60 bg-white px-4 py-3.5 text-sm font-medium outline-none transition-all duration-300 focus:border-royal-500 focus:ring-2 focus:ring-royal-500/20 focus:shadow-[0_0_0_4px_rgba(77,86,240,0.08)] hover:border-navy-300";
 
   return (
-    <form onSubmit={submit} className="space-y-4" noValidate>
+    <form onSubmit={submit} className="space-y-5" noValidate>
       <div className={`grid gap-4 ${compact ? "" : "sm:grid-cols-2"}`}>
         <div>
-          <label htmlFor="lead-name" className="mb-1.5 block text-xs font-bold uppercase tracking-wider text-navy-500">
+          <label htmlFor="lead-name" className="mb-2 block text-xs font-bold uppercase tracking-wider text-navy-500">
             Full name *
           </label>
           <input
@@ -60,7 +60,7 @@ ${form.notes ? `Notes: ${form.notes}` : ""}`;
           />
         </div>
         <div>
-          <label htmlFor="lead-phone" className="mb-1.5 block text-xs font-bold uppercase tracking-wider text-navy-500">
+          <label htmlFor="lead-phone" className="mb-2 block text-xs font-bold uppercase tracking-wider text-navy-500">
             Phone / WhatsApp *
           </label>
           <input
@@ -77,7 +77,7 @@ ${form.notes ? `Notes: ${form.notes}` : ""}`;
 
       <div className={`grid gap-4 ${compact ? "" : "sm:grid-cols-2"}`}>
         <div>
-          <label htmlFor="lead-email" className="mb-1.5 block text-xs font-bold uppercase tracking-wider text-navy-500">
+          <label htmlFor="lead-email" className="mb-2 block text-xs font-bold uppercase tracking-wider text-navy-500">
             Email
           </label>
           <input
@@ -91,7 +91,7 @@ ${form.notes ? `Notes: ${form.notes}` : ""}`;
           />
         </div>
         <div>
-          <label htmlFor="lead-profile" className="mb-1.5 block text-xs font-bold uppercase tracking-wider text-navy-500">
+          <label htmlFor="lead-profile" className="mb-2 block text-xs font-bold uppercase tracking-wider text-navy-500">
             I am a…
           </label>
           <select
@@ -109,7 +109,7 @@ ${form.notes ? `Notes: ${form.notes}` : ""}`;
 
       {!compact && (
         <div>
-          <label htmlFor="lead-notes" className="mb-1.5 block text-xs font-bold uppercase tracking-wider text-navy-500">
+          <label htmlFor="lead-notes" className="mb-2 block text-xs font-bold uppercase tracking-wider text-navy-500">
             Anything we should know?
           </label>
           <textarea
@@ -131,7 +131,7 @@ ${form.notes ? `Notes: ${form.notes}` : ""}`;
 
       <button
         type="submit"
-        className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#1faa53] px-6 py-3.5 text-sm font-bold text-white shadow-sm transition-all hover:bg-[#189546] hover:shadow-md"
+        className="btn-shimmer inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-[#1faa53] px-6 py-4 text-sm font-bold text-white shadow-sm transition-all duration-300 hover:bg-[#189546] hover:shadow-[0_12px_32px_-8px_rgba(31,170,83,0.4)] cursor-pointer"
       >
         <IconWhatsApp className="h-5 w-5" />
         Get pre-approved — reply within 1 business day

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { CountUp } from "@/components/count-up";
 import { IconCheck, IconShield } from "@/components/icons";
+import { ParallaxImage } from "@/components/parallax";
 import { Reveal } from "@/components/reveal";
 import { VisaMatcher } from "@/components/tools/visa-matcher";
 import { ButtonLink, Container, SectionHeading } from "@/components/ui";
@@ -45,16 +45,19 @@ export default function WhyDubaiPage() {
     <>
       {/* Hero */}
       <section className="relative overflow-hidden bg-navy-950">
-        <Image
+        <ParallaxImage
           src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=2400&auto=format&fit=crop"
           alt="Dubai Marina at night"
-          fill
-          preload
-          sizes="100vw"
-          className="object-cover opacity-35"
+          priority
+          speed={0.25}
+          className="opacity-50"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-navy-950/60 via-navy-950/70 to-navy-950" />
-        <Container className="relative py-20 sm:py-24">
+        <div className="absolute inset-0" aria-hidden="true">
+          <div className="absolute inset-0 bg-gradient-to-b from-navy-950/60 via-navy-950/55 to-navy-950" />
+          <div className="bg-grain absolute inset-0" />
+        </div>
+        <div className="orb orb-gold absolute top-1/3 left-1/4 h-64 w-64 opacity-15" aria-hidden="true" />
+        <Container className="relative py-24 sm:py-28">
           <SectionHeading
             dark
             kicker="Why invest in Dubai"
@@ -62,11 +65,11 @@ export default function WhyDubaiPage() {
             lede="Dubai pairs record transaction volumes with investor-friendly visas and some of the strongest buyer protections anywhere. Here's the honest picture."
           />
           <Reveal>
-            <dl className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            <dl className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {DUBAI_STATS.map((s) => (
-                <div key={s.label} className="border-l-2 border-royal-500/60 pl-5">
+                <div key={s.label} className="glass rounded-2xl p-6">
                   <dt className="sr-only">{s.label}</dt>
-                  <dd className="font-display text-3xl font-semibold text-mist-50 sm:text-4xl">
+                  <dd className="font-display text-3xl font-semibold text-gradient-gold sm:text-4xl">
                     <CountUp
                       end={s.value}
                       prefix={s.prefix}
@@ -74,107 +77,112 @@ export default function WhyDubaiPage() {
                       decimals={s.decimals}
                     />
                   </dd>
-                  <dd className="mt-2 text-sm font-semibold text-navy-200">
+                  <dd className="mt-3 text-sm font-semibold text-navy-200">
                     {s.label}
                   </dd>
-                  <dd className="mt-0.5 text-xs text-navy-400">{s.note}</dd>
+                  <dd className="mt-1 text-xs text-navy-300">{s.note}</dd>
                 </div>
               ))}
             </dl>
           </Reveal>
-          <p className="mt-10 text-xs text-navy-400">
+          <p className="mt-12 text-xs text-navy-300">
             Market figures: Q1 2026 Dubai Land Department data, as summarised by
-            Hamsa Mortgage Brokers (December 2025 update).
+            Hamsa Mortgage Brokers (July 2026 update).
           </p>
         </Container>
       </section>
 
       {/* Visa matcher */}
-      <section className="py-16 sm:py-20">
+      <section className="py-20 sm:py-24">
         <Container>
-          <SectionHeading
-            kicker="Residency bridge"
-            title="What does your budget qualify you for?"
-            lede="Property purchase is one of the clearest routes to UAE residency. Move the slider — the visa tiers update live."
-          />
-          <div className="mt-10">
-            <VisaMatcher />
-          </div>
+          <Reveal>
+            <SectionHeading
+              kicker="Residency bridge"
+              title="What does your budget qualify you for?"
+              lede="Property purchase is one of the clearest routes to UAE residency. Move the slider — the visa tiers update live."
+            />
+          </Reveal>
+          <Reveal delay={100}>
+            <div className="mt-12">
+              <VisaMatcher />
+            </div>
+          </Reveal>
         </Container>
       </section>
 
       {/* Visa detail */}
-      <section className="border-y border-navy-100 bg-white py-16 sm:py-20">
+      <section className="border-y border-navy-100/40 bg-white py-20 sm:py-24">
         <Container>
           <div className="grid gap-6 lg:grid-cols-2">
-            {VISA_TIERS.map((tier) => (
-              <div
-                key={tier.name}
-                className="rounded-2xl border border-navy-100 bg-mist-50 p-7"
-              >
-                <h3 className="font-display text-2xl font-semibold text-navy-950">
-                  {tier.name}
-                </h3>
-                {tier.min > 0 && (
-                  <p className="font-display mt-2 text-3xl font-semibold text-royal-600">
-                    {tier.min.toLocaleString()} AED+
-                  </p>
-                )}
-                <ul className="mt-4 space-y-2.5">
-                  {tier.rules.map((r) => (
-                    <li key={r} className="flex items-start gap-2.5 text-sm text-navy-600">
-                      <IconCheck className="mt-0.5 h-4 w-4 shrink-0 text-royal-600" />
-                      {r}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+            {VISA_TIERS.map((tier, i) => (
+              <Reveal key={tier.name} delay={i * 80}>
+                <div className="group rounded-2xl border border-navy-100/60 bg-gradient-to-b from-mist-50 to-white p-8 transition-all duration-400 hover:-translate-y-1 hover:shadow-premium">
+                  <h3 className="font-display text-2xl font-semibold text-navy-950">
+                    {tier.name}
+                  </h3>
+                  {tier.min > 0 && (
+                    <p className="font-display mt-3 text-3xl font-semibold text-gradient-gold">
+                      {tier.min.toLocaleString()} AED+
+                    </p>
+                  )}
+                  <ul className="mt-5 space-y-3">
+                    {tier.rules.map((r) => (
+                      <li key={r} className="flex items-start gap-2.5 text-sm text-navy-600">
+                        <IconCheck className="mt-0.5 h-4 w-4 shrink-0 text-royal-600" />
+                        {r}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </Reveal>
             ))}
           </div>
         </Container>
       </section>
 
       {/* Fundamentals */}
-      <section className="py-16 sm:py-20">
+      <section className="py-20 sm:py-24">
         <Container>
-          <SectionHeading
-            kicker="Market fundamentals"
-            title="Why the demand keeps compounding"
-          />
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {FUNDAMENTALS.map((f) => (
-              <div
-                key={f.title}
-                className="rounded-2xl border border-navy-100 bg-white p-6"
-              >
-                <h3 className="font-semibold text-navy-950">{f.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-navy-500">
-                  {f.body}
-                </p>
-              </div>
+          <Reveal>
+            <SectionHeading
+              kicker="Market fundamentals"
+              title="Why the demand keeps compounding"
+            />
+          </Reveal>
+          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {FUNDAMENTALS.map((f, i) => (
+              <Reveal key={f.title} delay={i * 60}>
+                <div className="group rounded-2xl border border-navy-100/60 bg-white p-7 transition-all duration-400 hover:-translate-y-1 hover:shadow-premium">
+                  <h3 className="font-semibold text-navy-950">{f.title}</h3>
+                  <p className="mt-2.5 text-sm leading-relaxed text-navy-500">
+                    {f.body}
+                  </p>
+                </div>
+              </Reveal>
             ))}
           </div>
         </Container>
       </section>
 
       {/* Escrow */}
-      <section className="bg-navy-950 py-16 sm:py-20">
-        <Container className="grid items-center gap-10 lg:grid-cols-[auto_1fr]">
-          <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-royal-500/15 text-royal-300 ring-1 ring-royal-500/30">
-            <IconShield className="h-8 w-8" />
+      <section className="relative overflow-hidden bg-navy-950 py-20 sm:py-24">
+        <div className="orb orb-royal absolute -top-16 right-1/4 h-48 w-48 opacity-15" aria-hidden="true" />
+        <Container className="relative grid items-center gap-10 lg:grid-cols-[auto_1fr]">
+          <span className="flex h-18 w-18 items-center justify-center rounded-2xl bg-gradient-to-br from-royal-500/20 to-gold-400/10 text-gold-400 ring-1 ring-white/10">
+            <IconShield className="h-9 w-9" />
           </span>
           <div>
             <h2 className="font-display text-2xl font-semibold text-mist-50 sm:text-3xl">
               Off-plan, protected by escrow
             </h2>
-            <p className="mt-3 max-w-3xl leading-relaxed text-navy-200">
+            <p className="mt-4 max-w-3xl leading-relaxed text-navy-200">
               Dubai&apos;s regulatory framework provides strong protection for
               off-plan buyers through regulated escrow accounts, ensuring that
               developers can access purchaser funds only as construction
               milestones are achieved. Combined with DLD project registration,
               your capital is supervised from contract to handover.
             </p>
-            <div className="mt-7">
+            <div className="mt-8">
               <ButtonLink href="/#get-started" variant="accent">
                 Discuss an investment plan
               </ButtonLink>

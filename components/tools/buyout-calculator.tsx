@@ -123,7 +123,7 @@ export function BuyoutCalculator() {
         </p>
         <div className="mt-3 flex flex-wrap items-end gap-x-6 gap-y-2">
           <div>
-            <p className="text-[0.7rem] font-bold uppercase tracking-wider text-navy-400">
+            <p className="text-[0.7rem] font-bold uppercase tracking-wider text-navy-300">
               Current
             </p>
             <p className="text-2xl font-semibold text-navy-300 line-through decoration-navy-600 tabular-nums">
@@ -206,7 +206,7 @@ export function BuyoutCalculator() {
                 ? `${aed(Math.abs(result.lifetimeSaving))} worse off`
                 : "Break-even"}
           </p>
-          <p className="mt-1 text-xs text-navy-400">
+          <p className="mt-1 text-xs text-navy-300">
             Total payments difference minus switching costs. We only recommend a
             buyout when the numbers clearly win.
           </p>

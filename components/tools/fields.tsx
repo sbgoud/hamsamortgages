@@ -59,7 +59,7 @@ export function SliderField({
           />
           <div
             className={`mt-1 flex justify-between text-[0.7rem] font-medium ${
-              dark ? "text-navy-400" : "text-navy-400"
+              dark ? "text-navy-300" : "text-navy-500"
             }`}
           >
             {hint ? <span>{hint}</span> : <span />}
@@ -148,7 +148,7 @@ export function ResultTile({
       >
         {value}
       </p>
-      {sub && <p className="mt-0.5 text-xs text-navy-400">{sub}</p>}
+      {sub && <p className="mt-0.5 text-xs text-navy-300">{sub}</p>}
     </div>
   );
 }
@@ -174,7 +174,7 @@ export function CostRow({
         className={`text-sm ${strong ? "font-bold text-mist-50" : "text-navy-300"}`}
       >
         {label}
-        {note && <span className="ml-1 text-xs text-navy-500">{note}</span>}
+        {note && <span className="ml-1 text-xs text-navy-300">{note}</span>}
       </span>
       <span
         className={`shrink-0 tabular-nums ${

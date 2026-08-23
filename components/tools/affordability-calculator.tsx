@@ -113,7 +113,7 @@ export function AffordabilityCalculator() {
         <p className="font-display mt-2 text-5xl font-semibold text-mist-50 tabular-nums">
           {result.maxLoan > 0 ? aed(result.maxLoan) : "—"}
         </p>
-        <p className="mt-1.5 text-sm text-navy-400">
+        <p className="mt-1.5 text-sm text-navy-300">
           Based on the UAE Central Bank 50% debt-burden cap ·{" "}
           {Math.round(result.ltv * 100)}% LTV assumed
         </p>

@@ -17,6 +17,18 @@
   --color-royal-900: #0b0d52;
   --color-royal-950: #070a38;
 
+  /* Warm gold accent for premium feel */
+  --color-gold-50: #fefbec;
+  --color-gold-100: #fdf4c8;
+  --color-gold-200: #fce88d;
+  --color-gold-300: #f9d44b;
+  --color-gold-400: #f7c522;
+  --color-gold-500: #e8a708;
+  --color-gold-600: #c98104;
+  --color-gold-700: #a35c07;
+  --color-gold-800: #86480e;
+  --color-gold-900: #723b12;
+
   /* Deep blue-grays for dark surfaces & text */
   --color-navy-950: #04081f;
   --color-navy-900: #070d2e;
@@ -40,12 +52,50 @@
   --shadow-lift: 0 20px 44px -20px rgba(0, 15, 159, 0.35);
   --shadow-glow: 0 12px 40px -10px rgba(0, 15, 159, 0.55);
   --shadow-card: 0 1px 3px rgba(4, 8, 31, 0.06), 0 8px 24px -16px rgba(4, 8, 31, 0.12);
+  --shadow-glass: 0 8px 32px rgba(4, 8, 31, 0.12), inset 0 0 0 0.5px rgba(255, 255, 255, 0.06);
+  --shadow-premium: 0 4px 16px rgba(0, 15, 159, 0.08), 0 24px 48px -16px rgba(4, 8, 31, 0.18);
+  --shadow-gold-glow: 0 8px 32px -8px rgba(232, 167, 8, 0.3);
 
   --animate-marquee: marquee 46s linear infinite;
+  --animate-shimmer: shimmer 2.5s ease-in-out infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-glow: pulse-glow 2s ease-in-out infinite;
+  --animate-gradient-shift: gradient-shift 6s ease infinite;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+/* ─── Lenis smooth-scroll compatibility ─── */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ─── Refined scrollbar ─── */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-mist-100);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--color-royal-400), var(--color-royal-600));
+  border-radius: 8px;
+  border: 2px solid var(--color-mist-100);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--color-gold-400), var(--color-royal-500));
 }
 
 body {
@@ -94,10 +144,110 @@ input[type="range"] {
   background-size: 56px 56px;
 }
 
+/* Fine grid for footer */
+.bg-grid-fine {
+  background-image:
+    linear-gradient(rgba(197, 206, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(197, 206, 255, 0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* ─── Glassmorphism utilities ─── */
+.glass {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-light {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(204, 209, 232, 0.5);
+}
+
+.glass-dark {
+  background: rgba(4, 8, 31, 0.4);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ─── Gradient border wrapper ─── */
+.gradient-border {
+  position: relative;
+}
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    var(--color-royal-400),
+    var(--color-gold-400),
+    var(--color-royal-300)
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.gradient-border:hover::before {
+  opacity: 1;
+}
+
+/* ─── Shimmer effect for buttons ─── */
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.btn-shimmer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.15),
+    transparent
+  );
+  transition: left 0.6s ease;
+}
+.btn-shimmer:hover::after {
+  left: 100%;
+}
+
+/* ─── Glow line for timeline ─── */
+.glow-line {
+  background: linear-gradient(
+    180deg,
+    var(--color-royal-500),
+    var(--color-royal-400) 50%,
+    var(--color-gold-400)
+  );
+  box-shadow: 0 0 12px rgba(77, 86, 240, 0.4), 0 0 24px rgba(77, 86, 240, 0.2);
+}
+
+/* ─── Animations ─── */
 @keyframes fade-up {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(18px);
   }
   to {
     opacity: 1;
@@ -106,26 +256,85 @@ input[type="range"] {
 }
 
 .animate-fade-up {
-  animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .animate-fade-up-1 {
-  animation-delay: 0.08s;
+  animation-delay: 0.1s;
 }
 .animate-fade-up-2 {
-  animation-delay: 0.16s;
+  animation-delay: 0.2s;
 }
 .animate-fade-up-3 {
-  animation-delay: 0.24s;
+  animation-delay: 0.3s;
+}
+
+@keyframes shimmer {
+  0%, 100% {
+    background-position: -200% center;
+  }
+  50% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(77, 86, 240, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 24px rgba(77, 86, 240, 0.5), 0 0 48px rgba(77, 86, 240, 0.15);
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 /* Scroll reveal (driven by IntersectionObserver in components/reveal.tsx) */
 .reveal {
   opacity: 0;
-  transform: translateY(22px);
+  transform: translateY(28px);
   transition:
-    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: opacity, transform;
 }
 
@@ -146,15 +355,15 @@ input[type="range"] {
   -webkit-mask-image: linear-gradient(
     to right,
     transparent,
-    black 12%,
-    black 88%,
+    black 8%,
+    black 92%,
     transparent
   );
   mask-image: linear-gradient(
     to right,
     transparent,
-    black 12%,
-    black 88%,
+    black 8%,
+    black 92%,
     transparent
   );
 }
@@ -167,6 +376,84 @@ input[type="range"] {
 
 .marquee:hover .marquee-track {
   animation-play-state: paused;
+}
+
+/* ─── Premium text gradient ─── */
+.text-gradient-royal {
+  background: linear-gradient(135deg, var(--color-royal-200), var(--color-royal-400), var(--color-gold-300));
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 6s ease infinite;
+}
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, var(--color-gold-300), var(--color-gold-400), var(--color-royal-300));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ─── Card hover effects ─── */
+.card-hover {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.card-hover:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-premium);
+}
+
+/* ─── Image hover zoom ─── */
+.img-zoom {
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.img-zoom:hover {
+  transform: scale(1.05);
+}
+
+/* ─── Ken Burns slow zoom for parallax imagery ─── */
+@keyframes ken-burns {
+  from {
+    transform: scale(1.02);
+  }
+  to {
+    transform: scale(1.12);
+  }
+}
+
+.animate-ken-burns {
+  animation: ken-burns 24s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* ─── Film grain overlay for hero depth ─── */
+.bg-grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.28'/%3E%3C/svg%3E");
+}
+
+/* ─── Decorative orbs ─── */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.orb-royal {
+  background: radial-gradient(circle, var(--color-royal-500) 0%, transparent 70%);
+}
+
+.orb-gold {
+  background: radial-gradient(circle, var(--color-gold-400) 0%, transparent 70%);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -185,6 +472,18 @@ input[type="range"] {
     transition: none;
   }
   .marquee-track {
+    animation: none;
+  }
+  .text-gradient-royal {
+    animation: none;
+  }
+  .card-hover:hover {
+    transform: none;
+  }
+  .btn-shimmer::after {
+    display: none;
+  }
+  .animate-ken-burns {
     animation: none;
   }
 }
